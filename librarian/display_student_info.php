@@ -1,6 +1,14 @@
 <?php
+session_start();
+if(!isset($_SESSION['librarian'])){
+?>
+<script type="text/javascript"> 
+window.location="login.php";
+</script>
+<?php
+}
+include "connect.php";
 include 'header.php';
-include 'connect.php';
 ?>
         <!-- page content area main -->
         <div class="right_col" role="main">

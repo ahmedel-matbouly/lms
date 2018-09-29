@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'connect.php';
 ?>
 <!DOCTYPE html>
@@ -61,37 +62,31 @@ include 'connect.php';
             </div>
         </form>
     </section>
-    
 </div>
 <?php
-    if(isset($_POST['login1'])){
-        $count = 0;
-        $result = mysqli_query($con,"select * from librarian_registeration where 
-          username ='$_POST[username]' && password ='$_POST[password]'");
-        $count =mysqli_num_rows($result);
-        if($count == 0){
-            ?>
-
-            <div class="alert alert-danger col-lg-2 col-lg-push-5">
+if (isset($_POST['login1'])){
+    $count = 0;
+    $result = mysqli_query($con, "select * from librarian_registeration 
+                  where username = '$_POST[username]' && password = '$_POST[password]'
+    ");
+    $count = mysqli_num_rows($result);
+    if($count == 0){
+        ?>
+         <div class="alert alert-danger col-lg-2 col-lg-push-5">
               <strong style="color:white">Invalid</strong> Username Or Password.
             </div>
+        <?php
+    }
+        else {
+            $_SESSION['librarian'] =$_POST['username'];
+            ?>
+            <script type ="text/javascript">
+                window.location ="display_student_info.php";
+            </script>
             <?php
         }
-        else{
-            ?>
-            <script type = "text/javascript">
-            window.location = "display_student_info.php";
-                </script>
-           <?php 
-        }
-
-    }
-    ?>
-
-
-
-
-
+}
+?>
 
 </body>
 </html>

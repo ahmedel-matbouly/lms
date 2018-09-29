@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'connect.php';
 ?>
 <!DOCTYPE html>
@@ -51,7 +52,7 @@ include 'connect.php';
 
             <div class="separator">
                 <p class="change_link">New to site?
-                    <a href="registration.html"> Create Account </a>
+                    <a href="registeration.php"> Create Account </a>
                 </p>
 
                 <div class="clearfix"></div>
@@ -67,7 +68,7 @@ include 'connect.php';
     if(isset($_POST['login1'])){
         $count = 0;
         $result = mysqli_query($con,"select * from student_registeration where 
-          username ='$_POST[username]' && password ='$_POST[password]' && status ='yes' ");
+          username ='$_POST[username]' && password ='$_POST[password]' && status='yes'");
         $count =mysqli_num_rows($result);
         if($count == 0){
             ?>
@@ -78,18 +79,15 @@ include 'connect.php';
             <?php
         }
         else{
+        $_SESSION['username']=$_POST['username'];
             ?>
             <script type = "text/javascript">
-            window.location = "display_student_info.php";
+            window.location = "my_issued_book.php";
                 </script>
            <?php 
         }
 
     }
     ?>
-
-
-
-
 </body>
 </html>
